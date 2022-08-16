@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+<h1>Log in</h1>
+{% endblock title %}
+
+{% block content %}
+
+<h1>Login Page</h1>
+
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col-4">  
+            <form method="post">
+
+                {% csrf_token %}
+            
+                {{form|crispy}}  <br>
+            
+                <input type="submit" value="login" class="btn btn-success">
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-4">  
+            <form method="post">
+
+                {% csrf_token %}
+            
+                {{form|crispy}}  <br>
+            
+                <input type="submit" value="login" class="btn btn-success">
+            </form>
+        </div>
+    </div>
+            <h2>to add new article,you should login at first</h2> <hr>
+            <h5>don't you have any account?<a class="nav-link" href="{% url 'signup' %}" style="color:blue ;" >sign up</a></h5>
+            
+     
+</div>
+{% endif %}
+{% endblock content %}

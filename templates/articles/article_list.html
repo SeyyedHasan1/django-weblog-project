@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Article List
+{% endblock title%}
+
+{% block content %}
+<br>
+<h1>Article List</h1>
+<hr>
+
+{% comment %} {% for article in object_list %}
+{{article.title}}
+{% endfor %} {% endcomment %}
+
+{% for article in articles %}   {% comment %}articles is object_list {% endcomment %}
+   
+            
+            <li>
+                <a href="{{article.get_absolute_url}}">{{article}}</a>  
+                {% comment %} Because the Article model contain's a primar key & id  {% endcomment %}
+            </li>
+            <br>
+            {% if user.is_authenticated and article.author == user %}
+            <a href="{% url 'article_edit' article.id%}" class='text-bg-success'>Edit</a> |
+            <a href="{% url 'article_delete'  article.id%}" class='text-bg-success'>Delete</a>           
+            {% endif %} 
+            <hr>
+
+{% endfor %}
+                            
+
+{% endblock content %}
+
+

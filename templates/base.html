@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+    <title>{% block title %}
+
+
+        {% endblock title %}
+        </title>
+</head>
+<body>
+    <header>
+         {% comment %} {% if user.is_authenticated %}
+            Hi {{user.username}} <hr>
+            <a href="{% url 'logout' %}">logout</a>
+        
+        {% else %}
+            <a href="{% url 'login' %}">login</a>   <hr>
+            <a href="{% url 'signup' %}">sign_up</a> {% endcomment %}
+
+        {% comment %} {% endif %}   {% endcomment %}
+
+        <nav class="navbar navbar-expand-lg bg-light"> 
+            <div class="container-fluid">  <br><br>
+              <h4 class="nav-item active"> <br>
+                <a class="navbar-brand" href="{% url 'home' %}" style="color:blue ;">Home</a>
+              </h4>
+              <h4 class="nav-item active"> <br>
+                <a class="navbar-brand" href="{% url 'article_list' %}" style="color:blue ;" >Articles List</a>
+              </h4 class="new-item active">
+              
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  
+                    {% if user.is_authenticated %}
+                    Hi {{user.username}}
+                    
+          
+                      <hr>
+                      <nav class="navbar navbar-expand-lg bg-light"> 
+                        <div class="container-fluid">  <br><br>
+                          <h4 class="nav-item active"> <br>
+                            <a class="navbar-brand" href="{% url 'article_create' %}" style="color:blue ;" >add Article</a><br>
+                          </h4>
+
+
+                  <h4 class="nav-item active"> <br> 
+                    <a class="navbar-brand" href="{% url 'logout' %}" style="color:blue ;" >log out</a>
+                  </h4 class="new-item active">
+                  {% else %}
+                  <h4 class="nav-item active"> <br>
+
+                  <a class="nav-link" href="{% url 'login' %}" style="color:blue ;">log in</a> 
+                  </h4>
+                    <h4 class="nav-item active"> <br>
+                  
+                  <a class="nav-link" href="{% url 'signup' %}" style="color:blue ;" >sign up</a>
+                    </h4>
+
+                 {% endif %}
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    
+    {% block content %}
+
+
+    {% endblock content %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ Article Details
+{% endblock title %}
+
+
+{% block content %}
+<h1>{{article.title}}</h1>
+<h3>Directed by {{article.author}} at {{article.date}}</h3>
+
+<p>{{article.body}}</p>
+<hr>
+{% if user.is_authenticated and article.author == user %}
+            <a href="{% url 'article_edit' article.id%}" class='text-bg-success'>Edit</a> |
+            <a href="{% url 'article_delete'  article.id%}" class='text-bg-success'>Delete</a>           
+            {% endif %} 
+            <hr>
+{% comment %} <a href="{% url 'article_edit' article.id%}" class='text-bg-success'>Edit</a> |
+<a href="{% url 'article_delete'  article.id%}" class='text-bg-success'>Delete</a> <hr> {% endcomment %}
+ 
+<ul>
+
+    {% for comment in article.comments.all %}   {% comment %}comments is ralated_name in Comment model  {% endcomment %}
+    <li>
+
+        <b>{{comment.writer}}</b> || {{comment.comment}} <hr>
+
+    </li> 
+    {% endfor %} 
+</ul>
+
+
+
+
+
+{% if user.is_authenticated %}
+<form method='POST'>
+
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <input type='submit' value='Comment' class='btn btn-success'>
+
+    {% else %}
+    <h1 class='text-danger'>* to add comment you should first log in on your account</h1>
+
+</form>
+{% endif %}
+
+
+
+
+
+
+{% endblock content %} 
+ 
